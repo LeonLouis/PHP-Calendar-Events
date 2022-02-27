@@ -4,7 +4,7 @@ class Calendar {
 
   // Connect to Database
   function connect(){
-    return mysqli_connect('localhost', 'root', '', 'technical_exam');
+    return mysqli_connect('localhost', 'root', '', 'php_calendar_db');
   }
 
   function get_calendar($month,$year){
@@ -14,11 +14,11 @@ class Calendar {
     }
     // Add Events
     if(isset($_POST['add_event'])){
-      $eventtitle = $_POST['eventtitle'];
+      $event_title = $_POST['event_title'];
       $description = $_POST['description'];
-      $dateandtime = $_POST['dateandtime'];
-      $eventowner = $_POST['eventowner'];
-      $sql = "INSERT INTO events (eventtitle, description, dateandtime, eventowner) VALUES ('$eventtitle', '$description', '$dateandtime', '$eventowner')";
+      $date_time = $_POST['date_time'];
+      $event_owner = $_POST['event_owner'];
+      $sql = "INSERT INTO events (event_title, description, date_time, event_owner) VALUES ('$event_title', '$description', '$date_time', '$event_owner')";
       mysqli_query($this->connect(), $sql);
       $params = $_GET;
       if(isset($params['id'])){
@@ -28,7 +28,7 @@ class Calendar {
     }
 
     // Get Data by Month and Year
-    $get_all_events = mysqli_query($this->connect(), 'SELECT *,DATE(dateandtime) as only_date FROM `events` WHERE MONTH(DATE(dateandtime)) = '.$month.' AND YEAR(DATE(dateandtime)) = '.$year.'');
+    $get_all_events = mysqli_query($this->connect(), 'SELECT *,DATE(date_time) as only_date FROM `events` WHERE MONTH(DATE(date_time)) = '.$month.' AND YEAR(DATE(date_time)) = '.$year.'');
     while( $result = mysqli_fetch_assoc($get_all_events)){
       $results[] = $result; 
     };
@@ -191,7 +191,7 @@ class Calendar {
               <div class="events">
                 <div class="form-group">
                   <label>Event Title</label>
-                  <label class="form-control mb-2" ><?php echo $result_val['eventtitle']?></label>
+                  <label class="form-control mb-2" ><?php echo $result_val['event_title']?></label>
                 </div>
                 <div class="form-group">
                   <label>Description</label>
@@ -199,11 +199,11 @@ class Calendar {
                 </div>
                 <div class="form-group">
                   <label>Date and Time</label>
-                  <label class="form-control mb-2" ><?php echo $result_val['dateandtime']?></label>
+                  <label class="form-control mb-2" ><?php echo $result_val['date_time']?></label>
                 </div>
                 <div class="form-group">
                   <label>Event Owner</label>
-                  <label class="form-control mb-2" ><?php echo $result_val['eventowner']?></label>
+                  <label class="form-control mb-2" ><?php echo $result_val['event_owner']?></label>
                 </div>
               </div>
             </div>

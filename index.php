@@ -26,7 +26,7 @@
                 <div class="events">
                   <div class="form-group">
                     <label>Event Title</label>
-                    <input type="text" class="form-control mb-2" name="eventtitle" autocomplete="off" required>
+                    <input type="text" class="form-control mb-2" name="event_title" autocomplete="off" required>
                   </div>
                   <div class="form-group">
                     <label>Description</label>
@@ -34,11 +34,11 @@
                   </div>
                   <div class="form-group">
                     <label>Date and Time</label>
-                    <input type="datetime-local" class="form-control mb-2" name="dateandtime" autocomplete="off" required>
+                    <input type="datetime-local" class="form-control mb-2" name="date_time" autocomplete="off" required>
                   </div>
                   <div class="form-group">
                     <label>Event Owner</label>
-                    <input type="text" class="form-control mb-2" name="eventowner" placeholder="Event Owner" autocomplete="off" required>
+                    <input type="text" class="form-control mb-2" name="event_owner" placeholder="Event Owner" autocomplete="off" required>
                   </div>
                 </div>
             </div>
@@ -57,9 +57,9 @@
       $y = isset($_GET['y']) && !empty($_GET['y']) ? $_GET['y'] : date('Y');
       echo $calendar->get_calendar($m,$y); 
     ?>
-     
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="script.js"></script>
   </body>
 </html>
