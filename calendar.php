@@ -69,7 +69,7 @@ class Calendar {
         $prev_month = '12';
         $prev_year = $year - 1;
       } else {
-        $prev_month = ( $month - 1 ) <= 9 ? '0'.$month - 1 : $month - 1;
+        $prev_month = ( $month - 1 ) <= 9 ? '0' . ( $month - 1 ) : $month - 1;
         $prev_year = $year;
       }
 
@@ -77,7 +77,7 @@ class Calendar {
         $next_month = '01';
         $next_year = $year + 1;
       } else {
-        $next_month = ( $month + 1 ) <= 9 ? '0'.$month + 1 : $month + 1;
+        $next_month = ( $month + 1 ) <= 9 ? '0' . ( $month + 1 ) : $month + 1;
         $next_year = $year;
       }
     ?>
@@ -85,9 +85,9 @@ class Calendar {
       <div class="row align-items-center card shadow">
         <div class="card-body py-5">
           <h2 class="text-center mb-4 text-uppercase">
-            <a href="<?php echo $_SERVER['PHP_SELF'].'?m='.$prev_month.'&y='.$prev_year; ?>" class="icon"><i class="fa-solid fa-angle-left"></i></a>
+            <a href="<?php echo ($year == '1902' && $month == '01') ? '#' : $_SERVER['PHP_SELF'].'?m='.$prev_month.'&y='.$prev_year; ?>" class="icon <?php echo ($year == '1902' && $month == '01') ? 'disabled' : ''; ?>"><i class="fa-solid fa-angle-left"></i></a>
             <?php echo date('F', strtotime($current_data)); ?>
-            <a href="<?php echo $_SERVER['PHP_SELF'].'?m='.$next_month.'&y='.$next_year; ?>" class="icon"><i class="fa-solid fa-angle-right"></i></a>
+            <a href="<?php echo ($year == '2075' && $month == '12') ? '#' : $_SERVER['PHP_SELF'].'?m='.$next_month.'&y='.$next_year; ?>" class="icon <?php echo ($year == '2075' && $month == '12') ? 'disabled' : ''; ?>"><i class="fa-solid fa-angle-right"></i></a>
           </h2>
           <div class="calendar-btns mb-4">
             <form method="post">

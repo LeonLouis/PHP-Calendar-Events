@@ -73,6 +73,10 @@ button.close {
 .icon i {
   color: #428bc9;
 }
+a.icon.disabled i {
+  cursor: not-allowed;
+  color: #b1b1b1;
+}
 .btn-addevent {
   background-color: #428bc9 !important;
   color: #ffffff !important;
