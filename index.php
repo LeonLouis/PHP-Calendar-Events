@@ -44,7 +44,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="submit" name="add_event" class="btn btn-primary">Add Event</button>
+              <button type="submit" name="add_event" class="btn btn-addevent">Add Event</button>
             </div>
           </form> 
         </div>

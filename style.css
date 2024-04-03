@@ -4,14 +4,12 @@
   box-sizing: border-box;
 }
 body {
-  background: linear-gradient(#0089da, #0067ad);
-  background-repeat: no-repeat;
+  background: #8085a5 !important;
   height: 100vh;
 }
-
 .main-calendar td {
   position: relative;
-  border: 3px solid #ffffff;
+  border: 1px solid #2e3140;
   vertical-align: top;
 }
 .main-calendar .day {
@@ -22,29 +20,29 @@ body {
   line-height: 25px;
   position: relative;
   z-index: 2;
-  right: 5px;
-  top: 2px;
+  right: 0;
+  top: 0;
   float: right;
   width: 25px;
   text-align: center;
-  background: #999999;
   font-size: 14px;
   color: #ffffff;
 }
 .main-calendar .calendar-head {
-  background-color: #ee3019;
   color: #ffffff;
-  border: 3px solid #ffffff;
+  border: 1px solid #2e3140;
   width: 200px;
+  background-color: #323441;
 }
 .main-calendar {
   margin: auto;
 }
 td.calendar-day-prev {
-  background: #cccccc;
+  background: #525461;
 }
 td.day.calendar-day {
-  background: #ededed;
+  background: #323441;
+  position: relative;
 }
 .calendar-wrapper {
   position: absolute;
@@ -54,30 +52,55 @@ td.day.calendar-day {
 }
 .calendar-wrapper .card {
   border-radius: 20px;
+  background-color: #494b58 !important;
 }
-.calendar-btns {
-  text-align: center;
+.calendar-btns form {
+  max-width: 350px;
+  width: 100%;
 }
 .calendar-btns select {
   padding: 5px 10px;
   height: 38px;
+  width: 100%;
+  outline: 0;
+}
+.calendar-btns select:focus {
+  border-color: #494b58;
+  box-shadow: none;
 }
 button.close {
   border: none;
   background: transparent;
   font-size: 24px;
 }
-.calendar-btns form {
-  display: inline-block;
+.icon {
+  font-size: 14px;
 }
 .icon i {
-  color: #428bc9;
+  color: #fff;
 }
 a.icon.disabled i {
   cursor: not-allowed;
-  color: #b1b1b1;
+  color: #4f4f4f;
 }
 .btn-addevent {
-  background-color: #428bc9 !important;
+  background-color: #f74174 !important;
   color: #ffffff !important;
+}
+a.event {
+  text-decoration: none;
+  color: #fff;
+  display: block !important;
+  position: absolute;
+  top: 35px;
+  background-color: #f74174;
+  width: 100%;
+  left: 0;
+  padding: 5px;
+  font-size: 12px;
+  line-height: 12px;
+  border-left: 4px solid #d01449;
+}
+a.event:hover {
+  color: #fff;
 }

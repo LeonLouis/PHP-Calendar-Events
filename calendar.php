@@ -84,41 +84,47 @@ class Calendar {
     <div class="calendar-wrapper container col-md-12">
       <div class="row align-items-center card shadow">
         <div class="card-body py-5">
-          <h2 class="text-center mb-4 text-uppercase">
-            <a href="<?php echo ($year == '1902' && $month == '01') ? '#' : $_SERVER['PHP_SELF'].'?m='.$prev_month.'&y='.$prev_year; ?>" class="icon <?php echo ($year == '1902' && $month == '01') ? 'disabled' : ''; ?>"><i class="fa-solid fa-angle-left"></i></a>
-            <?php echo date('F', strtotime($current_data)); ?>
-            <a href="<?php echo ($year == '2075' && $month == '12') ? '#' : $_SERVER['PHP_SELF'].'?m='.$next_month.'&y='.$next_year; ?>" class="icon <?php echo ($year == '2075' && $month == '12') ? 'disabled' : ''; ?>"><i class="fa-solid fa-angle-right"></i></a>
-          </h2>
-          <div class="calendar-btns mb-4">
+          <div class="calendar-btns mb-4 d-flex justify-content-between">
             <form method="post">
-              <select name="month" id="month">
-                <?php foreach($months as $month_key => $month_val):
-                  if($month_key == $month):
-                ?>
-                  <option value="<?php echo $month_key; ?>" selected><?php echo $month_val; ?></option>
-                <?php else: ?>
-                  <option value="<?php echo $month_key; ?>"><?php echo $month_val; ?></option>
-                <?php endif; ?>
-                <?php endforeach; ?>
-              </select>
-              <select name="year" id="year">
-                <?php for($y = 1902; $y <= 2075; $y++): 
-                  if($y == $year):
-                ?>
-                  <option value="<?php echo $y; ?>" selected><?php echo $y; ?></option>
-                <?php else: ?>
-                  <option value="<?php echo $y; ?>"><?php echo $y; ?></option>
-                <?php endif; ?>
-                <?php endfor; ?>
-              </select>
-              <button type="submit" name="update_calendar" class="btn btn-warning text-white"><span><i class="fa fa-clock"></i></span> Show</button>
+              <div class="input-group">
+                <select class="form-select" name="month" id="month" aria-label="Select Month">
+                  <?php foreach($months as $month_key => $month_val):
+                    if($month_key == $month):
+                  ?>
+                    <option value="<?php echo $month_key; ?>" selected><?php echo $month_val; ?></option>
+                  <?php else: ?>
+                    <option value="<?php echo $month_key; ?>"><?php echo $month_val; ?></option>
+                  <?php endif; ?>
+                  <?php endforeach; ?>
+                </select>
+                <select class="form-select" name="year" id="year" aria-label="Select Year">
+                  <?php for($y = 1902; $y <= 2075; $y++): 
+                    if($y == $year):
+                  ?>
+                    <option value="<?php echo $y; ?>" selected><?php echo $y; ?></option>
+                  <?php else: ?>
+                    <option value="<?php echo $y; ?>"><?php echo $y; ?></option>
+                  <?php endif; ?>
+                  <?php endfor; ?>
+                </select>
+                <button type="submit" name="update_calendar" class="btn btn-outline-secondary text-white" type="button">Filter</button>
+              </div>
             </form>
-            <button type="button" class="btn btn-addevent" data-toggle="modal" data-target="#addEvent">Add an Event</button>
+            <button type="button" class="btn btn-addevent" data-toggle="modal" data-target="#addEvent"><i class="fa fa-plus" aria-hidden="true"></i> Add Event</button>
           </div>
           <table class="table-responsive main-calendar w-100">
             <tr>
+              <th colspan="7" class="calendar-head px-3 py-2 text-end">
+                <h5 class="mb-0 text-capitalize text-white">
+                  <a href="<?php echo ($year == '1902' && $month == '01') ? '#' : $_SERVER['PHP_SELF'].'?m='.$prev_month.'&y='.$prev_year; ?>" class="me-2 icon <?php echo ($year == '1902' && $month == '01') ? 'disabled' : ''; ?>"><i class="fa-solid fa-angle-left"></i></a>
+                  <?php echo date('F', strtotime($current_data)); ?>
+                  <a href="<?php echo ($year == '2075' && $month == '12') ? '#' : $_SERVER['PHP_SELF'].'?m='.$next_month.'&y='.$next_year; ?>" class="ms-2 icon <?php echo ($year == '2075' && $month == '12') ? 'disabled' : ''; ?>"><i class="fa-solid fa-angle-right"></i></a>
+                </h5>
+              </th>
+            </tr>
+            <tr>
               <?php foreach( $days as $day ): ?>
-                <th class="calendar-head text-center py-2"><div class="font-weight-normal"><?php echo $day; ?></div></th>
+                <th class="calendar-head text-center py-3"><div class="font-weight-normal"><?php echo $day; ?></div></th>
               <?php endforeach; ?>
             </tr>
               <tr>
@@ -141,8 +147,8 @@ class Calendar {
                                   $params = $_GET;
                                   $params['id'] = $result_val['id'];
                                 ?>
-                                  <a href="<?php echo $_SERVER['PHP_SELF'].'?'.http_build_query($params); ?>" data-id="<?php echo $result_val['id']; ?>">
-                                    <span class="icon"><i class="fa fa-calendar"></i></span>
+                                  <a class="event" href="<?php echo $_SERVER['PHP_SELF'].'?'.http_build_query($params); ?>" data-id="<?php echo $result_val['id']; ?>">
+                                    <span class="icon"><?php echo $result_val['event_title']; ?></span>
                                   </a>
                                 <?php
                                 }
