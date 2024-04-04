@@ -112,70 +112,72 @@ class Calendar {
             </form>
             <button type="button" class="btn btn-addevent" data-toggle="modal" data-target="#addEvent"><i class="fa fa-plus" aria-hidden="true"></i> Add Event</button>
           </div>
-          <table class="table-responsive main-calendar w-100">
-            <tr>
-              <th colspan="7" class="calendar-head px-3 py-2 text-end">
-                <h5 class="mb-0 text-capitalize text-white">
-                  <a href="<?php echo ($year == '1902' && $month == '01') ? '#' : $_SERVER['PHP_SELF'].'?m='.$prev_month.'&y='.$prev_year; ?>" class="me-2 icon <?php echo ($year == '1902' && $month == '01') ? 'disabled' : ''; ?>"><i class="fa-solid fa-angle-left"></i></a>
-                  <?php echo date('F', strtotime($current_data)); ?>
-                  <a href="<?php echo ($year == '2075' && $month == '12') ? '#' : $_SERVER['PHP_SELF'].'?m='.$next_month.'&y='.$next_year; ?>" class="ms-2 icon <?php echo ($year == '2075' && $month == '12') ? 'disabled' : ''; ?>"><i class="fa-solid fa-angle-right"></i></a>
-                </h5>
-              </th>
-            </tr>
-            <tr>
-              <?php foreach( $days as $day ): ?>
-                <th class="calendar-head text-center py-3"><div class="font-weight-normal"><?php echo $day; ?></div></th>
-              <?php endforeach; ?>
-            </tr>
+          <div class="table-wrapper">
+            <table class="table-responsive main-calendar w-100">
               <tr>
-                <?php for($x = 0; $x < $running_day; $x++): ?>
-                  <td class="day calendar-day-prev"> </td>
-                  <?php $days_in_this_week++; ?>
-                <?php endfor; ?>
-                  <?php for($list_day = 1; $list_day <= $days_in_month; $list_day++): ?>
-                    <td class="day calendar-day">
-                      <?php 
-                        $m_day = $list_day < 10 ? '0'.$list_day : $list_day; 
-                        $data_date = $year.'-'.$month.'-'.$m_day;
-                      ?>
-                      <div class="day-number" data-date="<?php echo $data_date; ?>">
-                        <span class="day-span"><?php echo $list_day; ?></span>
-                          <?php
-                            if(!empty($results)):
-                              foreach($results as $result_key => $result_val){
-                                if ( $result_val['only_date'] == $data_date ) { 
-                                  $params = $_GET;
-                                  $params['id'] = $result_val['id'];
-                                ?>
-                                  <a class="event" href="<?php echo $_SERVER['PHP_SELF'].'?'.http_build_query($params); ?>" data-id="<?php echo $result_val['id']; ?>">
-                                    <span class="icon"><?php echo $result_val['event_title']; ?></span>
-                                  </a>
-                                <?php
-                                }
-                              }
-                            endif;
-                          ?>
-                      </div>
-                    </td>
-                    <?php if($running_day == 6): ?>
-                      </tr>
-                      <?php if(($day_counter+1) != $days_in_month): ?>
-                          <tr class="calendar-row">
-                      <?php endif; ?>
-                      <?php 
-                        $running_day = -1;
-                        $days_in_this_week = 0;
-                      ?>
-                    <?php endif; ?>
-                    <?php $days_in_this_week++; $running_day++; $day_counter++; ?>
-                  <?php endfor; ?>
-              <?php if($days_in_this_week < 8): ?>
-                <?php for($x = 1; $x <= (8 - $days_in_this_week); $x++): ?>
-                  <td class="calendar-day-prev"> </td>
-                <?php endfor; ?>
-              <?php endif; ?>
+                <th colspan="7" class="calendar-head px-3 py-2 text-end">
+                  <h5 class="mb-0 text-capitalize text-white">
+                    <a href="<?php echo ($year == '1902' && $month == '01') ? '#' : $_SERVER['PHP_SELF'].'?m='.$prev_month.'&y='.$prev_year; ?>" class="me-2 icon <?php echo ($year == '1902' && $month == '01') ? 'disabled' : ''; ?>"><i class="fa-solid fa-angle-left"></i></a>
+                    <?php echo date('F', strtotime($current_data)); ?>
+                    <a href="<?php echo ($year == '2075' && $month == '12') ? '#' : $_SERVER['PHP_SELF'].'?m='.$next_month.'&y='.$next_year; ?>" class="ms-2 icon <?php echo ($year == '2075' && $month == '12') ? 'disabled' : ''; ?>"><i class="fa-solid fa-angle-right"></i></a>
+                  </h5>
+                </th>
               </tr>
-          </table>
+              <tr>
+                <?php foreach( $days as $day ): ?>
+                  <th class="calendar-head text-center py-3"><div class="font-weight-normal"><?php echo $day; ?></div></th>
+                <?php endforeach; ?>
+              </tr>
+                <tr>
+                  <?php for($x = 0; $x < $running_day; $x++): ?>
+                    <td class="day calendar-day-prev"> </td>
+                    <?php $days_in_this_week++; ?>
+                  <?php endfor; ?>
+                    <?php for($list_day = 1; $list_day <= $days_in_month; $list_day++): ?>
+                      <td class="day calendar-day">
+                        <?php 
+                          $m_day = $list_day < 10 ? '0'.$list_day : $list_day; 
+                          $data_date = $year.'-'.$month.'-'.$m_day;
+                        ?>
+                        <div class="day-number" data-date="<?php echo $data_date; ?>">
+                          <span class="day-span"><?php echo $list_day; ?></span>
+                            <?php
+                              if(!empty($results)):
+                                foreach($results as $result_key => $result_val){
+                                  if ( $result_val['only_date'] == $data_date ) { 
+                                    $params = $_GET;
+                                    $params['id'] = $result_val['id'];
+                                  ?>
+                                    <a class="event" href="<?php echo $_SERVER['PHP_SELF'].'?'.http_build_query($params); ?>" data-id="<?php echo $result_val['id']; ?>">
+                                      <span class="icon"><?php echo $result_val['event_title']; ?></span>
+                                    </a>
+                                  <?php
+                                  }
+                                }
+                              endif;
+                            ?>
+                        </div>
+                      </td>
+                      <?php if($running_day == 6): ?>
+                        </tr>
+                        <?php if(($day_counter+1) != $days_in_month): ?>
+                            <tr class="calendar-row">
+                        <?php endif; ?>
+                        <?php 
+                          $running_day = -1;
+                          $days_in_this_week = 0;
+                        ?>
+                      <?php endif; ?>
+                      <?php $days_in_this_week++; $running_day++; $day_counter++; ?>
+                    <?php endfor; ?>
+                <?php if($days_in_this_week < 8): ?>
+                  <?php for($x = 1; $x <= (8 - $days_in_this_week); $x++): ?>
+                    <td class="calendar-day-prev"> </td>
+                  <?php endfor; ?>
+                <?php endif; ?>
+                </tr>
+            </table>
+          </div>
         </div>
       </div>
     </div>
